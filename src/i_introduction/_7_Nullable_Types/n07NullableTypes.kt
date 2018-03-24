@@ -1,5 +1,6 @@
 package i_introduction._7_Nullable_Types
 
+import util.JavaCode
 import util.TODO
 import util.doc7
 
@@ -22,11 +23,7 @@ fun todoTask7(client: Client?, message: String?, mailer: Mailer): Nothing = TODO
     references = { JavaCode7().sendMessageToClient(client, message, mailer) }
 )
 
-fun sendMessageToClient(
-        client: Client?, message: String?, mailer: Mailer
-) {
-    todoTask7(client, message, mailer)
-}
+
 
 class Client (val personalInfo: PersonalInfo?)
 class PersonalInfo (val email: String?)
@@ -34,3 +31,28 @@ class PersonalInfo (val email: String?)
 interface Mailer {
     fun sendMessage(email: String, message: String)
 }
+fun sendMessageToClient(
+        client: Client?, message: String?, mailer: Mailer
+) {
+    try {
+        val personalInfo = client?.personalInfo;
+        val email = personalInfo?.email;
+        mailer.sendMessage(email!!, message!!)
+    }catch(ex: NullPointerException ) {
+        return
+    }
+}
+
+/*
+Converted automatically:
+
+    fun sendMessageToClient(client: Client?, message: String?, mailer: Mailer) {
+        if (client == null || message == null) return
+
+        val personalInfo = client.personalInfo ?: return
+
+        val email = personalInfo.email ?: return
+
+        mailer.sendMessage(email, message)
+    }
+*/
