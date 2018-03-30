@@ -13,10 +13,5 @@ val Customer.orderedProducts: Set<Product> get() {
 }
 
 val Shop.allOrderedProducts: Set<Product> get() {
-    // Return all products that were ordered by at least one customer
-    val allProducts = HashSet<Product> ()
-
-    customers.forEach({allProducts.addAll(it.orderedProducts)})
-//  try  to do fold instead
-    return allProducts
+    return customers.flatMap { it.orderedProducts }.toSet()
 }

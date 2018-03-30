@@ -10,6 +10,8 @@ import java.util.Map;
 
 public class _24_JavaCode extends JavaCode {
     public Collection<String> doSomethingStrangeWithCollection(Collection<String> collection) {
+
+        // build a map of string length->strings
         Map<Integer, List<String>> groupsByLength = Maps.newHashMap();
         for (String s : collection) {
             List<String> strings = groupsByLength.get(s.length());
@@ -20,6 +22,7 @@ public class _24_JavaCode extends JavaCode {
             strings.add(s);
         }
 
+        // find maximum count of element per group
         int maximumSizeOfGroup = 0;
         for (List<String> group : groupsByLength.values()) {
             if (group.size() > maximumSizeOfGroup) {
@@ -27,6 +30,7 @@ public class _24_JavaCode extends JavaCode {
             }
         }
 
+        // find and return the group with max number of elements
         for (List<String> group : groupsByLength.values()) {
             if (group.size() == maximumSizeOfGroup) {
                 return group;
