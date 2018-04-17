@@ -13,10 +13,16 @@ fun todoTask30(): Nothing = TODO(
 
 class MyDate(val year: Int, val month: Int, val dayOfMonth: Int)
 
+data class Result(val year: Int, val month: Int, val dayOfMonth: Int)
+
+fun destructurizer(date: MyDate): Result {
+    return Result(date.year, date.month, date.dayOfMonth)
+
+}
+
 fun isLeapDay(date: MyDate): Boolean {
-    todoTask30()
-//    val (year, month, dayOfMonth) = date
-//
-//    // 29 February of a leap year
-//    return year % 4 == 0 && month == 2 && dayOfMonth == 29
+    val (year, month, dayOfMonth) = destructurizer(date)
+
+    // 29 February of a leap year
+    return year % 4 == 0 && month == 2 && dayOfMonth == 29
 }

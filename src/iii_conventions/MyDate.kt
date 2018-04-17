@@ -1,5 +1,7 @@
 package iii_conventions
 
+import java.math.BigDecimal
+import java.math.BigInteger
 import java.time.Year
 import java.util.*
 
@@ -35,6 +37,21 @@ enum class TimeInterval {
     DAY,
     WEEK,
     YEAR
+}
+
+class MultiInterval(val interval: TimeInterval, val count:  Int)
+
+operator fun MyDate.plus(other: TimeInterval): MyDate {
+    return addTimeIntervals(other, 1)
+}
+
+operator fun MyDate.plus(other: MultiInterval): MyDate {
+    return addTimeIntervals(other.interval, other.count)
+}
+
+operator fun TimeInterval.times(other: Int): MultiInterval {
+    return MultiInterval(this, other)
+
 }
 
 class DateIterator(val range: DateRange, var current:MyDate = range.start): Iterator<MyDate> {
